@@ -15,12 +15,20 @@ pipeline{
         }
 
         stage('Build Docker Image') {
-            steps {
-                echo "Starting Docker build..."
-                sh "docker build -t ${DOCKER_IMAGE} ."
-                echo "Docker image built successfully."
+    steps {
+        script {
+            echo "Logging into Docker Hub..."
+            withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                sh '''
+                echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                docker build -t ${DOCKER_IMAGE} .
+                '''
             }
+            echo "Docker image built successfully."
         }
+    }
+}
+
 
 	stage('Run Container Locally'){
 		steps {
