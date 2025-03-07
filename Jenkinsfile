@@ -13,6 +13,15 @@ pipeline{
                 echo "Repository cloned successfully."
             }
         }
+	stage('Docker Login') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
+                        echo "Logged into Docker Hub"
+                    }
+                }
+            }
+        }
 
         stage('Build Docker Image') {
     steps {
