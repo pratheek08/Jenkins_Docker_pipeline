@@ -2,7 +2,7 @@ pipeline{
 	agent any
 	environment{
 		DOCKER_IMAGE = "pratheek008/my-jenkins-app"
-		DOCKER_CREDENTIALS_ID = "docker-cred"
+		DOCKER_CREDENTIALS_ID = "39267e43-9788-4c04-9501-114511bd964d"
 
 	}
 	stages {
