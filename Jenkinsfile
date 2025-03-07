@@ -47,8 +47,7 @@ pipeline{
         stage('Push Docker Image') {
             steps {
                 script {
-                    echo "Logging into Docker Hub..."
-                    docker.withRegistry('https://index.docker.io/v1/', 'DOCKER_CREDENTIALS_ID') {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
                         echo "Pushing Docker image..."
                         sh "docker push ${DOCKER_IMAGE}"
                         echo "Docker image pushed successfully."
