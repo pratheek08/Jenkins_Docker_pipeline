@@ -15,18 +15,12 @@ pipeline{
         }
 
         stage('Build Docker Image') {
-    steps {
-        script {
-            echo "Logging into Docker Hub..."
-	docker.withRegistry('https://index.docker.io/v1/', 'docker-cred') {                
-		sh '''
-                docker build -t ${DOCKER_IMAGE} .
-                '''
+            steps {
+                echo "Starting Docker build..."
+                sh "docker build -t ${DOCKER_IMAGE} ."
+                echo "Docker image built successfully."
             }
-            echo "Docker image built successfully."
         }
-    }
-}
 
 
 	stage('Run Container Locally'){
