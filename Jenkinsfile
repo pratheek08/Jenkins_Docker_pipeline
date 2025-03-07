@@ -60,11 +60,8 @@ pipeline{
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
-sh '''
-echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-docker pull prabsin/my-jenkins-app:latest
-'''
 
+			sh "docker pull pratheek008/my-jenkins-app:latest"
 
 }
 
